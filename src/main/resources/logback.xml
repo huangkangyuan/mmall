@@ -11,9 +11,9 @@
     </appender>
 
     <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${catalina.base}/webapps/mmall/logs/access/access.log</file>
+        <file>${catalina.base}/webapps/mmall/logs/access/mmall.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${catalina.base}/webapps/mmall/logs/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>${catalina.base}/webapps/mmall/logs/mmall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -24,7 +24,7 @@
 
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${catalina.base}/webapps/mmall/logs/access/access.log</file>
+        <file>${catalina.base}/webapps/mmall/logs/mmall/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${catalina.base}/webapps/mmall/logs/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>

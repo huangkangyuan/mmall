@@ -151,4 +151,56 @@
       update_time =  now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updatePasswordByUsername" parameterType="map">
+    UPDATE mmall_user
+    set password = #{passwordNew},update_time = now()
+    where username = #{username}
+  </update>
+
+  <select id="checkUsername" parameterType="string" resultType="int">
+    select COUNT(1)
+    from mmall_user
+    where username = #{username}
+  </select>
+
+  <select id="checkEmail" resultType="java.lang.Integer">
+    select COUNT(1)
+    from mmall_user
+    where email = #{email}
+  </select>
+
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from mmall_user
+    where username=#{username}
+    and password = #{password}
+  </select>
+  <select id="selectQuestionByUsername" resultType="java.lang.String" parameterType="string">
+    select
+    question
+    from mmall_user
+    where username = #{username}
+  </select>
+  <select id="checkAnswer" resultType="java.lang.Integer" parameterType="map">
+    select count(1)
+    from mmall_user
+    where username = #{username}
+    and question = #{question}
+    and answer = #{answer}
+  </select>
+  <select id="checkPassword" resultType="java.lang.Integer" parameterType="map">
+    select
+    count(1)
+    from mmall_user
+    where password = #{password}
+    and id = #{userId}
+  </select>
+  <select id="checkEmailByUserId" resultType="java.lang.Integer" parameterType="map">
+    select COUNT(1)
+    from mmall_user
+    where email = #{email}
+    and id != #{userId}
+  </select>
+
 </mapper>
