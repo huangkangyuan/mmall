@@ -34,6 +34,7 @@ import java.util.*;
 public class Main {
     private static Log log = LogFactory.getLog(Main.class);
 
+
     // 支付宝当面付2.0服务
     private static AlipayTradeService   tradeService;
 
