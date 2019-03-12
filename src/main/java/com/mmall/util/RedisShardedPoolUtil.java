@@ -121,26 +121,4 @@ public class RedisShardedPoolUtil {
         jedis.close();
         return result;
     }
-
-
-    public static void main(String[] args) {
-        ShardedJedis jedis = RedisShardedPool.getJedis();
-
-        RedisPoolUtil.set("keyTest","value");
-
-        String value = RedisPoolUtil.get("keyTest");
-
-        RedisPoolUtil.setEx("keyex","valueex",60*10);
-
-        RedisPoolUtil.expire("keyTest",60*20);
-
-        RedisPoolUtil.del("keyTest");
-
-
-        String aaa = RedisPoolUtil.get(null);
-        System.out.println(aaa);
-
-        System.out.println("end");
-
-    }
 }
