@@ -1,14 +1,12 @@
 package com.mmall.common;
 
 import com.mmall.util.PropertiesUtil;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
-import redis.clients.jedis.util.Hashing;
-import redis.clients.jedis.util.Sharded;
+import redis.clients.util.Hashing;
+import redis.clients.util.Sharded;
 
 import java.util.ArrayList;
 import java.util.List;
