@@ -19,10 +19,8 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
-/**
- * Created by geely
- */
 @Slf4j
 public class AuthorityInterceptor implements HandlerInterceptor{
 
@@ -33,7 +31,6 @@ public class AuthorityInterceptor implements HandlerInterceptor{
         HandlerMethod handlerMethod = (HandlerMethod)handler;
 
         //解析HandlerMethod
-
         String methodName = handlerMethod.getMethod().getName();
         String className = handlerMethod.getBean().getClass().getSimpleName();
 
@@ -42,7 +39,7 @@ public class AuthorityInterceptor implements HandlerInterceptor{
         Map paramMap = request.getParameterMap();
         Iterator it = paramMap.entrySet().iterator();
         while (it.hasNext()){
-            Map.Entry entry = (Map.Entry)it.next();
+            Entry entry = (Entry)it.next();
             String mapKey = (String)entry.getKey();
 
             String mapValue = StringUtils.EMPTY;
@@ -64,9 +61,7 @@ public class AuthorityInterceptor implements HandlerInterceptor{
 
         log.info("权限拦截器拦截到请求,className:{},methodName:{},param:{}",className,methodName,requestParamBuffer.toString());
 
-
         User user = null;
-
         String loginToken = CookieUtil.readLoginToken(request);
         if(StringUtils.isNotEmpty(loginToken)){
             String userJsonStr = RedisShardedPoolUtil.get(loginToken);
@@ -75,9 +70,9 @@ public class AuthorityInterceptor implements HandlerInterceptor{
 
         if(user == null || (user.getRole().intValue() != Const.Role.ROLE_ADMIN)){
             //返回false.即不会调用controller里的方法
-            response.reset();//geelynote 这里要添加reset，否则报异常 getWriter() has already been called for this response.
-            response.setCharacterEncoding("UTF-8");//geelynote 这里要设置编码，否则会乱码
-            response.setContentType("application/json;charset=UTF-8");//geelynote 这里要设置返回值的类型，因为全部是json接口。
+            response.reset();//这里要添加reset，否则报异常 getWriter() has already been called for this response.
+            response.setCharacterEncoding("UTF-8");//这里要设置编码，否则会乱码
+            response.setContentType("application/json;charset=UTF-8");//这里要设置返回值的类型，因为全部是json接口。
 
             PrintWriter out = response.getWriter();
 
@@ -102,10 +97,8 @@ public class AuthorityInterceptor implements HandlerInterceptor{
                 }
             }
             out.flush();
-            out.close();//geelynote 这里要关闭
-
+            out.close();//  这里要关闭
             return false;
-
         }
         return true;
     }
