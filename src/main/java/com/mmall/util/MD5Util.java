@@ -5,9 +5,6 @@ import org.springframework.util.StringUtils;
 import java.security.MessageDigest;
 import java.util.Properties;
 
-/**
- * Created by geely
- */
 public class MD5Util {
 
     private static String byteArrayToHexString(byte b[]) {
