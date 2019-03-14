@@ -198,6 +198,11 @@
       update_time =  now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="closeOrderByOrderId" parameterType="int" >
+    UPDATE mmall_order
+    SET status = 0
+    where id = #{id}
+  </update>
 
   <select id="selectByUserIdAndOrderNo" resultMap="BaseResultMap" parameterType="map">
     SELECT
@@ -229,4 +234,13 @@
     from mmall_order
     ORDER BY  create_time desc
   </select>
+  <select id="selectOrderStatusByCreateTime" resultMap="BaseResultMap" parameterType="map">
+      select
+      <include refid="Base_Column_List"/>
+      from mmall_order
+      where status = #{status}
+      <![CDATA[and create_time <= #{date}]]>  <!-- create_time <= 2019-3-14 5:33-->
+      order by create_time desc
+  </select>
+
 </mapper>
